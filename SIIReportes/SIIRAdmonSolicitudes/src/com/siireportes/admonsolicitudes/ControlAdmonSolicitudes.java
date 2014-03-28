@@ -54,10 +54,11 @@ public class ControlAdmonSolicitudes {
         eq = new FAdmonEquipos();
         pe = new FPersistencia();
         co = new FCorreo();
-        if (eq.validaEquipo(s.getEquipo()) != null ||
-                em.validaEmpleado(s.getEmpleado()) != null) {
-            pe.guardarSolicitud(s);
-            co.enviarCorreo(s);
+        if (eq.validaEquipo(s.getEquipo()) != null
+                || em.validaEmpleado(s.getEmpleado()) != null) {
+            if (pe.guardarSolicitud(s) != null) {
+                co.enviarCorreo(s);
+            }
             return s;
         } else {
             return null;

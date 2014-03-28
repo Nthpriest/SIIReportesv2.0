@@ -26,6 +26,10 @@ import com.siireportes.interfacesnegocio.IAdmonSolicitudes;
 import com.siireportes.objetosnegocio.*;
 import com.siireportes.persistencia.EmpleadosJpaController;
 import com.siireportes.persistencia.EquiposJpaController;
+import com.siireportes.persistencia.SolicitudesJpaController;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Class Pruebas
@@ -41,15 +45,22 @@ public class Pruebas {
     public static void main(String[] args) throws PreexistingEntityException, Exception {
         // TODO code application logic here
         EmpleadosJpaController emjc = new EmpleadosJpaController();
-        EquiposJpaController eqjc = new EquiposJpaController();
+        EquiposJpaController eqjc = new EquiposJpaController();  
+        SolicitudesJpaController sjc = new SolicitudesJpaController();
+        //int counter = emjc.getEmpleadosCount()+1;
+        //String counterToString = "EM"+Integer.toString(counter);
         Empleado em = new Empleado("EM0001", "Alan Alberto", "García",
                 "Peñúñuri", "Coahuila #113 nte.", "6441643157",
                 "bearz_x@hotmail.com");
         Equipo eq = new Equipo("EQ0001", "Recepción");
-        /* emjc.create(em);
-         * eqjc.create(eq);*/
-        Solicitud s = new Solicitud(4, eq, em, "Monitor",
-                "No enciende el monitor", "22/03/2014");
+        //emjc.create(em);
+        //eqjc.create(eq);
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = dateFormat.format(date);
+        //int scounter = sjc.getSolicitudesCount()+1;
+        Solicitud s = new Solicitud(1, eq, em, "Monitor",
+                "No enciende el monitor", fecha);
         IAdmonSolicitudes fads = new FAdmonSolicitudes();
         try {
             if (fads.registrarSolicitud(s) != null) {
@@ -63,4 +74,3 @@ public class Pruebas {
         }
     }
 }
-

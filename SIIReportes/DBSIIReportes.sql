@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `DBSIIReportes`.`Solicitudes` (
   `Empleado` VARCHAR(15) NULL,
   `problema` VARCHAR(35) NULL,
   `observaciones` VARCHAR(100) NULL,
-  `fecha` VARCHAR(8) NULL,
+  `fecha` VARCHAR(10) NULL,
   PRIMARY KEY (`folio`),
   INDEX `idEquipo_idx` (`Equipo` ASC),
   INDEX `idEmpleado_idx` (`Empleado` ASC),

@@ -42,23 +42,15 @@ public class FCorreo implements ICorreo {
     public FCorreo() {
     }
 
-    /**
-     *
-     * @param s
-     * @return
-     * @throws CorreoException
-     * @throws MessagingException
-     */
     @Override
     public boolean enviarCorreo(Solicitud s) throws CorreoException {
         co = new ControlCorreo();        
         try {
-            return co.enviarCorreo(s);
+            co.enviarCorreo(s);
         } catch (MessagingException ex) {
             Logger.getLogger(FCorreo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
-        
     }
 
 }
