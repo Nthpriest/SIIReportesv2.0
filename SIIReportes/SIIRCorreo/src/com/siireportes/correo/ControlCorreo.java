@@ -54,7 +54,7 @@ public class ControlCorreo {
             message.setFrom(new InternetAddress("siireportes@gmail.com"));
             message.addRecipient(
                     Message.RecipientType.TO,
-                    new InternetAddress("siireportes@gmail.com"));
+                    new InternetAddress("aagpzx@gmail.com"));
             message.setSubject("Solicitud #" + s.getFolio());
             message.setText("Se genero una nueva Solicitud \n"
                     + "Folio: " + s.getFolio() + "\n"

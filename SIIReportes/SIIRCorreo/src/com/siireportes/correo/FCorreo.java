@@ -24,6 +24,9 @@ package com.siireportes.correo;
 import com.siireportes.excepciones.CorreoException;
 import com.siireportes.interfacescorreo.ICorreo;
 import com.siireportes.objetosnegocio.Solicitud;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 
 /**
@@ -39,10 +42,23 @@ public class FCorreo implements ICorreo {
     public FCorreo() {
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     * @throws CorreoException
+     * @throws MessagingException
+     */
     @Override
     public boolean enviarCorreo(Solicitud s) throws CorreoException {
         co = new ControlCorreo();        
-        return co.enviarCorreo(s);
+        try {
+            return co.enviarCorreo(s);
+        } catch (MessagingException ex) {
+            Logger.getLogger(FCorreo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+        
     }
 
 }

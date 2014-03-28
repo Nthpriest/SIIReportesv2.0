@@ -41,14 +41,14 @@ public class Pruebas {
     public static void main(String[] args) throws PreexistingEntityException, Exception {
         // TODO code application logic here
         EmpleadosJpaController emjc = new EmpleadosJpaController();
-        EquiposJpaController eqjc = new EquiposJpaController();        
+        EquiposJpaController eqjc = new EquiposJpaController();
         Empleado em = new Empleado("EM0001", "Alan Alberto", "García",
                 "Peñúñuri", "Coahuila #113 nte.", "6441643157",
                 "bearz_x@hotmail.com");
         Equipo eq = new Equipo("EQ0001", "Recepción");
-        //emjc.create(em);
-        //eqjc.create(eq);
-        Solicitud s = new Solicitud(1, eq, em, "Monitor",
+        /* emjc.create(em);
+         * eqjc.create(eq);*/
+        Solicitud s = new Solicitud(4, eq, em, "Monitor",
                 "No enciende el monitor", "22/03/2014");
         IAdmonSolicitudes fads = new FAdmonSolicitudes();
         try {
@@ -63,3 +63,4 @@ public class Pruebas {
         }
     }
 }
+

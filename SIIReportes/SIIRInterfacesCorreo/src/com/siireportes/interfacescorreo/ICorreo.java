@@ -23,6 +23,7 @@ package com.siireportes.interfacescorreo;
 
 import com.siireportes.excepciones.CorreoException;
 import com.siireportes.objetosnegocio.Solicitud;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 
 /**
  * Class ICorreo
