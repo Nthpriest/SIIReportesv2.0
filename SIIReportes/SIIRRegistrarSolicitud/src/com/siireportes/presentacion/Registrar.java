@@ -47,8 +47,9 @@ import javax.swing.JOptionPane;
 public class Registrar extends javax.swing.JFrame {
 
     IAdmonSolicitudes fads;
-    EmpleadosJpaController emjc = new EmpleadosJpaController();
-    EquiposJpaController eqjc = new EquiposJpaController();
+    EmpleadosJpaController emjc;
+    EquiposJpaController eqjc;
+    SolicitudesJpaController sjc;
 
     /**
      * Creates new form Registrar
@@ -231,16 +232,21 @@ public class Registrar extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         fads = new FAdmonSolicitudes();
-        Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String fecha = dateFormat.format(date);
+        sjc = new SolicitudesJpaController();
+        Date date;
+        date = new Date();
+        DateFormat dateFormat;
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha;
+        fecha = dateFormat.format(date);
         Equipo eq;
         Empleado em;
         eq = new Equipo(txtIdEquipo.getText().trim());
         em = new Empleado(txtIdEmpleado.getText().trim());
-        String cproblema = cboProblema.getSelectedItem().toString().trim();
-        String txproblema = txtProblema.getText().trim();
-        SolicitudesJpaController sjc = new SolicitudesJpaController();
+        String cproblema;
+        cproblema = cboProblema.getSelectedItem().toString().trim();
+        String txproblema;
+        txproblema = txtProblema.getText().trim();
         int scounter = sjc.getSolicitudesCount() + 1;
         Solicitud s;
         s = new Solicitud(scounter, eq, em, cproblema, txproblema, fecha);
@@ -270,11 +276,13 @@ public class Registrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtIdEquipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdEquipoFocusLost
+        eqjc = new EquiposJpaController();
         Equipo area = eqjc.findEquipos(txtIdEquipo.getText().trim());
         txtArea.setText(area.getArea().toString());
     }//GEN-LAST:event_txtIdEquipoFocusLost
 
     private void txtIdEmpleadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdEmpleadoFocusLost
+        emjc = new EmpleadosJpaController();
         Empleado empleado = emjc.findEmpleados(txtIdEmpleado.getText().trim());
         txtNombre.setText(empleado.getNombre()+" "+empleado.getAPaterno()+" "+empleado.getAMaterno());
     }//GEN-LAST:event_txtIdEmpleadoFocusLost
