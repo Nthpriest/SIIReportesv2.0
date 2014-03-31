@@ -59,7 +59,7 @@ public class Pruebas {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String fecha = dateFormat.format(date);
         //int scounter = sjc.getSolicitudesCount()+1;
-        Solicitud s = new Solicitud(1, eq, em, "Monitor",
+        Solicitud s = new Solicitud(7, eq, em, "Monitor",
                 "No enciende el monitor", fecha);
         IAdmonSolicitudes fads = new FAdmonSolicitudes();
         try {
