@@ -64,8 +64,8 @@ public class ControlCorreo {
                     + "("+ s.getEmpleado().getNombre() + " " 
                     + s.getEmpleado().getAPaterno() + " " 
                     + s.getEmpleado().getAMaterno() + ")"
-                    + "\n" + "Problema: " + s.getProblema() + "\n" + "Observaciones: "
-                    + s.getObservaciones() + "\n" + "Fecha: " + s.getFecha());
+                    + "\n" + "Problema: " + s.getProblema() + "\n" + "Observaciones:"
+                    + "\n" + s.getObservaciones() + "\n" + "Fecha: " + s.getFecha());
 
             // Lo enviamos.
             Transport t = session.getTransport("smtp");

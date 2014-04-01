@@ -21,28 +21,20 @@
 package com.siireportes.presentacion;
 
 import com.siireportes.admonsolicitudes.FAdmonSolicitudes;
-import com.siireportes.excepciones.CorreoException;
-import com.siireportes.excepciones.EmpleadoNotFoundException;
-import com.siireportes.excepciones.EquipoNotFoundException;
-import com.siireportes.excepciones.PersistenciaException;
-import com.siireportes.excepciones.PreexistingEntityException;
 import com.siireportes.interfacesnegocio.IAdmonSolicitudes;
-import com.siireportes.objetosnegocio.Empleado;
-import com.siireportes.objetosnegocio.Equipo;
-import com.siireportes.objetosnegocio.Solicitud;
-import com.siireportes.persistencia.EmpleadosJpaController;
-import com.siireportes.persistencia.EquiposJpaController;
-import com.siireportes.persistencia.SolicitudesJpaController;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import com.siireportes.objetosnegocio.*;
+import com.siireportes.persistencia.*;
+import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
+import java.awt.*;
+import java.text.*;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
+ * Class Registrar
  *
- * @author LV-322
+ * @author Alan García <bearz@outlook.com>
+ * @version 2.1
  */
 public class Registrar extends javax.swing.JFrame {
 
@@ -57,6 +49,17 @@ public class Registrar extends javax.swing.JFrame {
     public Registrar() {
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    /**
+     * This method assign an icon to the main frame.
+     *
+     * @return retValue
+     */
+    public Image iconSiir() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("com/siireportes/img/siir.png"));
+        return retValue;
     }
 
     /**
@@ -89,21 +92,25 @@ public class Registrar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIIR - Registrar Solicitud");
+        setIconImage(iconSiir());
+        setName("SIIRRegistrarSolicitud"); // NOI18N
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("ID Equipo:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("ID Empleado:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Problema:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Area:");
 
+        txtIdEquipo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtIdEquipo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtIdEquipoFocusLost(evt);
@@ -111,21 +118,27 @@ public class Registrar extends javax.swing.JFrame {
         });
 
         txtArea.setEditable(false);
+        txtArea.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        txtIdEmpleado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtIdEmpleado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtIdEmpleadoFocusLost(evt);
             }
         });
 
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/find.png"))); // NOI18N
         btnBuscar.setText("Buscar");
 
         txtNombre.setEditable(false);
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        cboProblema.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboProblema.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No enciende cpu", "No enciende monitor", "No enciende regulador", "No enciende impresora", "Se reincia sola", "Muestra pantalla azul", "Teclado no responde", "Mouse no responde", "Impresora no imprime", "No hay conección a internet", "Otro.." }));
 
         txtProblema.setColumns(20);
-        txtProblema.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        txtProblema.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtProblema.setRows(5);
         jScrollPane1.setViewportView(txtProblema);
 
@@ -141,49 +154,52 @@ public class Registrar extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtIdEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                .addComponent(txtIdEmpleado))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(btnBuscar)))
-                        .addComponent(txtNombre)
-                        .addComponent(cboProblema, 0, 213, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar))
+                    .addComponent(cboProblema, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(txtIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cboProblema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboProblema, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
         );
 
-        btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/ok.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +207,8 @@ public class Registrar extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/cancel.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,26 +222,25 @@ public class Registrar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRegistrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCancelar)
-                        .addContainerGap())))
+                    .addComponent(btnCancelar))
+                .addContainerGap())
         );
 
         pack();
@@ -247,28 +263,23 @@ public class Registrar extends javax.swing.JFrame {
         cproblema = cboProblema.getSelectedItem().toString().trim();
         String txproblema;
         txproblema = txtProblema.getText().trim();
-        int scounter = sjc.getSolicitudesCount() + 1;
-        Solicitud s;
-        s = new Solicitud(scounter, eq, em, cproblema, txproblema, fecha);
         try {
+            int scounter = sjc.getSolicitudesCount() + 1;
+            Solicitud s;
+            s = new Solicitud(scounter, eq, em, cproblema, txproblema, fecha);
             if (fads.registrarSolicitud(s) != null) {
-                JOptionPane.showMessageDialog(this, "Se generó la solicitud con folio:\n" + s.getFolio(), "Éxito", JOptionPane.INFORMATION_MESSAGE, null);
+                JOptionPane.showMessageDialog(this, "Se generó la solicitud\n  con folio: " + s.getFolio(), "Éxito", JOptionPane.INFORMATION_MESSAGE, null);
             } else {
-                JOptionPane.showMessageDialog(this, "Error", "No se pudo generar la solicitud", 0, null);
+                JOptionPane.showMessageDialog(this, "No se pudo generar la solicitud", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (EquipoNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Error", "No se encontro el Equipo", 0, null);
-        } catch (EmpleadoNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Error", "No se encontro el Empleado", 0, null);
-        } catch (PersistenciaException ex) {
-            JOptionPane.showMessageDialog(this, "Error", "Error al insertar en la Base de Datos", 0, null);
-        } catch (CorreoException ex) {
-            JOptionPane.showMessageDialog(this, "Error", "No se envío el correo\nIntente más tarde", 0, null);
-        } catch (PreexistingEntityException ex) {
-            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error", "Error en el sistema", 0, null);
+            JOptionPane.showMessageDialog(this, "Error en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        txtIdEquipo.setText("");
+        txtArea.setText("");
+        txtIdEmpleado.setText("");
+        txtNombre.setText("");
+        txtProblema.setText("");
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -276,15 +287,29 @@ public class Registrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtIdEquipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdEquipoFocusLost
-        eqjc = new EquiposJpaController();
-        Equipo area = eqjc.findEquipos(txtIdEquipo.getText().trim());
-        txtArea.setText(area.getArea().toString());
+        if (!txtIdEquipo.getText().equals("")) {
+            try {
+                eqjc = new EquiposJpaController();
+                Equipo area = eqjc.findEquipos(txtIdEquipo.getText().trim());
+                txtArea.setText(area.getArea().toString());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "     No se encontro el Equipo", "Error", JOptionPane.ERROR_MESSAGE);
+                txtArea.setText("");
+            }
+        }
     }//GEN-LAST:event_txtIdEquipoFocusLost
 
     private void txtIdEmpleadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdEmpleadoFocusLost
-        emjc = new EmpleadosJpaController();
-        Empleado empleado = emjc.findEmpleados(txtIdEmpleado.getText().trim());
-        txtNombre.setText(empleado.getNombre()+" "+empleado.getAPaterno()+" "+empleado.getAMaterno());
+        if (!txtIdEmpleado.getText().equals("")) {
+            try {
+                emjc = new EmpleadosJpaController();
+                Empleado empleado = emjc.findEmpleados(txtIdEmpleado.getText().trim());
+                txtNombre.setText(empleado.getNombre() + " " + empleado.getAPaterno() + " " + empleado.getAMaterno());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "     No se encontro el Empleado", "Error", JOptionPane.ERROR_MESSAGE);
+                txtNombre.setText("");
+            }
+        }
     }//GEN-LAST:event_txtIdEmpleadoFocusLost
 
     /**
@@ -297,25 +322,15 @@ public class Registrar extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
+        } catch (ParseException | UnsupportedLookAndFeelException e) {
         }
+
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Registrar().setVisible(true);
             }
