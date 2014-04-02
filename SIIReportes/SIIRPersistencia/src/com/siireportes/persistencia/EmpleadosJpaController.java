@@ -200,7 +200,15 @@ public class EmpleadosJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Empleado> getEmpleadosPorNombreLike(String nombre) {
+        String queryString = "SELECT e FROM Empleado e WHERE LOWER(e.nombre) LIKE :nombre";
+        Query query = getEntityManager().createQuery(queryString);
 
+        query.setParameter("nombre", nombre.toLowerCase() + '%');
+        return query.getResultList();
+    }
+    
     public int getEmpleadosCount() {
         EntityManager em = getEntityManager();
         try {

@@ -111,6 +111,11 @@ public class Registrar extends javax.swing.JFrame {
         jLabel4.setText("Area:");
 
         txtIdEquipo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtIdEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdEquipoActionPerformed(evt);
+            }
+        });
         txtIdEquipo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtIdEquipoFocusLost(evt);
@@ -121,6 +126,11 @@ public class Registrar extends javax.swing.JFrame {
         txtArea.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtIdEmpleado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtIdEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdEmpleadoActionPerformed(evt);
+            }
+        });
         txtIdEmpleado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtIdEmpleadoFocusLost(evt);
@@ -130,6 +140,11 @@ public class Registrar extends javax.swing.JFrame {
         btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/find.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -178,16 +193,16 @@ public class Registrar extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(11, 11, 11))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(txtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,7 +301,28 @@ public class Registrar extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void txtIdEmpleadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdEmpleadoFocusLost
+        buscarEmpleado();
+    }//GEN-LAST:event_txtIdEmpleadoFocusLost
+
+    private void txtIdEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEmpleadoActionPerformed
+        buscarEmpleado();
+    }//GEN-LAST:event_txtIdEmpleadoActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        Buscar bs = new Buscar(this,true);
+        bs.setVisible(true);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     private void txtIdEquipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdEquipoFocusLost
+        buscarEquipo();
+    }//GEN-LAST:event_txtIdEquipoFocusLost
+
+    private void txtIdEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEquipoActionPerformed
+        buscarEquipo();
+    }//GEN-LAST:event_txtIdEquipoActionPerformed
+    
+    private void buscarEquipo() {
         if (!txtIdEquipo.getText().equals("")) {
             try {
                 eqjc = new EquiposJpaController();
@@ -297,21 +333,21 @@ public class Registrar extends javax.swing.JFrame {
                 txtArea.setText("");
             }
         }
-    }//GEN-LAST:event_txtIdEquipoFocusLost
-
-    private void txtIdEmpleadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdEmpleadoFocusLost
+    }
+    
+    private void buscarEmpleado() {
         if (!txtIdEmpleado.getText().equals("")) {
             try {
                 emjc = new EmpleadosJpaController();
                 Empleado empleado = emjc.findEmpleados(txtIdEmpleado.getText().trim());
                 txtNombre.setText(empleado.getNombre() + " " + empleado.getAPaterno() + " " + empleado.getAMaterno());
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "     No se encontro el Empleado", "Error", JOptionPane.ERROR_MESSAGE);
                 txtNombre.setText("");
             }
         }
-    }//GEN-LAST:event_txtIdEmpleadoFocusLost
-
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -349,9 +385,9 @@ public class Registrar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtArea;
-    private javax.swing.JTextField txtIdEmpleado;
+    public static javax.swing.JTextField txtIdEmpleado;
     private javax.swing.JTextField txtIdEquipo;
-    private javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextArea txtProblema;
     // End of variables declaration//GEN-END:variables
 }
