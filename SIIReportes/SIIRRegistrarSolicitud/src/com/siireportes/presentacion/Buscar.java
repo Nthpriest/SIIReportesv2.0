@@ -24,7 +24,6 @@ import com.siireportes.objetosnegocio.Empleado;
 import com.siireportes.persistencia.EmpleadosJpaController;
 import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -236,11 +235,11 @@ public class Buscar extends javax.swing.JDialog {
         aMat = jTable1.getValueAt(fila, 3).toString();
         Registrar.txtIdEmpleado.setText(copiar);
         Registrar.txtNombre.setText(nombre+" "+aPat+" "+aMat);
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void actualizaLista() {
