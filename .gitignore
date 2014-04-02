@@ -213,3 +213,15 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/SIIReportes/SIIRRegistrarSolicitud/nbproject/private/
+/SIIReportes/SIIRAdmonEmpleados/nbproject/private/
+/SIIReportes/SIIRAdmonEquipos/nbproject/private/
+/SIIReportes/SIIRAdmonSolicitudes/nbproject/private/
+/SIIReportes/SIIRCorreo/nbproject/private/
+/SIIReportes/SIIRExcepciones/nbproject/private/
+/SIIReportes/SIIRInterfacesCorreo/nbproject/private/
+/SIIReportes/SIIRInterfacesNegocio/nbproject/private/
+/SIIReportes/SIIRInterfacesPersistencia/nbproject/private/
+/SIIReportes/SIIRObjetosNegocio/nbproject/private/
+/SIIReportes/SIIRPersistencia/nbproject/private/
+/SIIReportes/SIIRPruebas/nbproject/private/
