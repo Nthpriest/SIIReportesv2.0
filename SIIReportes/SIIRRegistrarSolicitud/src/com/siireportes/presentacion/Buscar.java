@@ -235,11 +235,11 @@ public class Buscar extends javax.swing.JDialog {
         aMat = jTable1.getValueAt(fila, 3).toString();
         Registrar.txtIdEmpleado.setText(copiar);
         Registrar.txtNombre.setText(nombre+" "+aPat+" "+aMat);
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void actualizaLista() {
