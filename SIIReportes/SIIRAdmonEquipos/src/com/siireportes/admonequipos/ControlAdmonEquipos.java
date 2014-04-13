@@ -21,8 +21,9 @@
 package com.siireportes.admonequipos;
 
 import com.siireportes.excepciones.EquipoNotFoundException;
+import com.siireportes.interfacespersistencia.IPersistencia;
 import com.siireportes.objetosnegocio.Equipo;
-import com.siireportes.persistencia.EquiposJpaController;
+import com.siireportes.persistencia.FPersistencia;
 
 /**
  * Class ControlAdmonEquipos
@@ -32,16 +33,13 @@ import com.siireportes.persistencia.EquiposJpaController;
  */
 public class ControlAdmonEquipos {
 
+    IPersistencia pe;
+    
     protected ControlAdmonEquipos() {
     }
 
-    protected Equipo validaEquipo(Equipo e) throws EquipoNotFoundException {
-        EquiposJpaController eqjc = new EquiposJpaController();
-        if(eqjc.findEquipos(e.getIdEquipos()) != null) {
-            return e;
-        }
-        else {
-            return null;
-        }
+    protected Equipo validaEquipo(Equipo eq) throws EquipoNotFoundException {
+        pe = new FPersistencia();
+        return pe.validaEquipo(eq);
     }
 }

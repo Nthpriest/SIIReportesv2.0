@@ -21,9 +21,8 @@
 
 package com.siireportes.interfacespersistencia;
 
-import com.siireportes.excepciones.PersistenciaException;
-import com.siireportes.excepciones.PreexistingEntityException;
-import com.siireportes.objetosnegocio.Solicitud;
+import com.siireportes.excepciones.*;
+import com.siireportes.objetosnegocio.*;
 
 /**
  * Class IPersistencia
@@ -33,6 +32,8 @@ import com.siireportes.objetosnegocio.Solicitud;
  */
 public interface IPersistencia {
 
+    Equipo validaEquipo(Equipo eq) throws EquipoNotFoundException;
+    Empleado validaEmpleado(Empleado em) throws EmpleadoNotFoundException;
     Solicitud guardarSolicitud(Solicitud s) throws PersistenciaException, PreexistingEntityException, Exception;
     
 }

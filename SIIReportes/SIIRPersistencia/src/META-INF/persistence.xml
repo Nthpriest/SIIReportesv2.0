@@ -6,10 +6,10 @@
     <class>com.siireportes.objetosnegocio.Equipo</class>
     <class>com.siireportes.objetosnegocio.Solicitud</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://sql4.freemysqlhosting.net:3306/sql434698?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.password" value="cH3*vG5*"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db4free.net:3306/siireportes?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value="9517538426"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="sql434698"/>
+      <property name="javax.persistence.jdbc.user" value="siireportes"/>
     </properties>
   </persistence-unit>
 </persistence>

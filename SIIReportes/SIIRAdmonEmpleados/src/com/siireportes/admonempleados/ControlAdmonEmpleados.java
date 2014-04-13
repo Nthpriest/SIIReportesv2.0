@@ -22,8 +22,10 @@
 package com.siireportes.admonempleados;
 
 import com.siireportes.excepciones.EmpleadoNotFoundException;
+import com.siireportes.interfacespersistencia.IPersistencia;
 import com.siireportes.objetosnegocio.Empleado;
 import com.siireportes.persistencia.EmpleadosJpaController;
+import com.siireportes.persistencia.FPersistencia;
 
 /**
  * Class ControlAdmonEmpleados
@@ -33,17 +35,14 @@ import com.siireportes.persistencia.EmpleadosJpaController;
  */
 public class ControlAdmonEmpleados{
 
+    IPersistencia pe;
+    
     protected ControlAdmonEmpleados() {
     }
     
-    protected Empleado validaEmpleado(Empleado e) throws EmpleadoNotFoundException {
-        EmpleadosJpaController emjc = new EmpleadosJpaController();
-        if(emjc.findEmpleados(e.getIdEmpleados()) != null) {
-            return e;
-        }
-        else {
-            return null;
-        }
+    protected Empleado validaEmpleado(Empleado em) throws EmpleadoNotFoundException {
+        pe = new FPersistencia();
+        return pe.validaEmpleado(em);
     }
     
 }

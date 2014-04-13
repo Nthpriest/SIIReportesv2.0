@@ -21,10 +21,9 @@
 
 package com.siireportes.persistencia;
 
-import com.siireportes.excepciones.PersistenciaException;
-import com.siireportes.excepciones.PreexistingEntityException;
+import com.siireportes.excepciones.*;
 import com.siireportes.interfacespersistencia.IPersistencia;
-import com.siireportes.objetosnegocio.Solicitud;
+import com.siireportes.objetosnegocio.*;
 
 /**
  * Class FPersistencia
@@ -39,6 +38,18 @@ public class FPersistencia implements IPersistencia {
     public FPersistencia() {
     }
 
+    @Override
+    public Equipo validaEquipo(Equipo eq) throws EquipoNotFoundException {
+        cp = new ControlPersistencia();
+        return cp.validaEquipo(eq);
+    }
+    
+    @Override
+    public Empleado validaEmpleado(Empleado em) throws EmpleadoNotFoundException {
+        cp = new ControlPersistencia();
+        return cp.validaEmpleado(em);
+    }
+    
     @Override
     public Solicitud guardarSolicitud(Solicitud s) throws PersistenciaException, PreexistingEntityException, Exception {
         cp = new ControlPersistencia();        
