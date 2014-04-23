@@ -34,6 +34,7 @@ public class ControlPersistencia {
     EquiposJpaController eqjc;
     EmpleadosJpaController emjc;
     SolicitudesJpaController sjc;
+    UsuariosJpaController ujc;
 
     protected ControlPersistencia() {
     }
@@ -61,5 +62,23 @@ public class ControlPersistencia {
         sjc = new SolicitudesJpaController();
         sjc.create(s);
         return s;
+    }
+    
+    protected Usuario alta(Usuario u) throws PreexistingEntityException, Exception {
+        ujc = new UsuariosJpaController();
+        ujc.create(u);
+        return u;
+    }
+    
+    protected Usuario cambio(Usuario u) throws NonexistentEntityException, Exception {
+        ujc = new UsuariosJpaController();
+        ujc.edit(u);
+        return u;
+    }
+    
+    protected Usuario baja(Usuario u) throws NonexistentEntityException, Exception {
+        ujc = new UsuariosJpaController();
+        ujc.destroy(u.getIdUsuario());
+        return u;
     }
 }

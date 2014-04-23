@@ -35,5 +35,8 @@ public interface IPersistencia {
     Equipo validaEquipo(Equipo eq) throws EquipoNotFoundException;
     Empleado validaEmpleado(Empleado em) throws EmpleadoNotFoundException;
     Solicitud guardarSolicitud(Solicitud s) throws PersistenciaException, PreexistingEntityException, Exception;
+    Usuario alta(Usuario u) throws PreexistingEntityException, Exception;
+    Usuario cambio(Usuario u) throws NonexistentEntityException, Exception;
+    Usuario baja(Usuario u) throws NonexistentEntityException, Exception;
     
 }

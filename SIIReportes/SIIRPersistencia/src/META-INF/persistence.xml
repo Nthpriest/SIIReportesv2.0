@@ -5,6 +5,7 @@
     <class>com.siireportes.objetosnegocio.Empleado</class>
     <class>com.siireportes.objetosnegocio.Equipo</class>
     <class>com.siireportes.objetosnegocio.Solicitud</class>
+    <class>com.siireportes.objetosnegocio.Usuario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db4free.net:3306/siireportes?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="9517538426"/>

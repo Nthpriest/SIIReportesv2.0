@@ -56,4 +56,22 @@ public class FPersistencia implements IPersistencia {
         return cp.guardarSolicitud(s);
     }
 
+    @Override
+    public Usuario alta(Usuario u) throws PreexistingEntityException, Exception {
+        cp = new ControlPersistencia();
+        return cp.alta(u);
+    }
+
+    @Override
+    public Usuario cambio(Usuario u) throws NonexistentEntityException, Exception {
+        cp = new ControlPersistencia();
+        return cp.cambio(u);
+    }
+
+    @Override
+    public Usuario baja(Usuario u) throws NonexistentEntityException, Exception {
+        cp = new ControlPersistencia();
+        return cp.baja(u);
+    }
+
 }

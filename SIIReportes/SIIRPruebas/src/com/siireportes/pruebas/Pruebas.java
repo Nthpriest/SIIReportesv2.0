@@ -21,12 +21,16 @@
 package com.siireportes.pruebas;
 
 import com.siireportes.admonsolicitudes.FAdmonSolicitudes;
+import com.siireportes.admonusuariosyperfiles.FAdmonUsuariosYPerfiles;
+import com.siireportes.admonusuariosyperfiles.ControlAdmonUsuariosYPerfiles;
 import com.siireportes.excepciones.*;
 import com.siireportes.interfacesnegocio.IAdmonSolicitudes;
+import com.siireportes.interfacesnegocio.IAdmonUsuariosYPerfiles;
 import com.siireportes.objetosnegocio.*;
 import com.siireportes.persistencia.EmpleadosJpaController;
 import com.siireportes.persistencia.EquiposJpaController;
 import com.siireportes.persistencia.SolicitudesJpaController;
+import com.siireportes.persistencia.UsuariosJpaController;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,30 +51,47 @@ public class Pruebas {
         EmpleadosJpaController emjc = new EmpleadosJpaController();
         EquiposJpaController eqjc = new EquiposJpaController();  
         SolicitudesJpaController sjc = new SolicitudesJpaController();
+        UsuariosJpaController ujc = new UsuariosJpaController();
         //int counter = emjc.getEmpleadosCount()+1;
         //String counterToString = "EM"+Integer.toString(counter);
         Empleado em = new Empleado("EM0001", "Alan Alberto", "García",
                 "Peñúñuri", "Coahuila #113 nte.", "6441643157",
                 "bearz_x@hotmail.com");
         Equipo eq = new Equipo("EQ0001", "Recepción");
+        
+        Usuario u = new Usuario("US2", "Salome", "Burgos", "Rodriguez", "California", "6441925729", 
+                "Salome_burgos@hotmail.com", "salome123", "Capturista");
+        
         //emjc.create(em);
         //eqjc.create(eq);
-        Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String fecha = dateFormat.format(date);
-        //int scounter = sjc.getSolicitudesCount()+1;
-        Solicitud s = new Solicitud(7, eq, em, "Monitor",
-                "No enciende el monitor", fecha);
-        IAdmonSolicitudes fads = new FAdmonSolicitudes();
+//        Date date = new Date();
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        String fecha = dateFormat.format(date);
+//        //int scounter = sjc.getSolicitudesCount()+1;
+//        Solicitud s = new Solicitud(7, eq, em, "Monitor",
+//                "No enciende el monitor", fecha);
+//        IAdmonSolicitudes fads = new FAdmonSolicitudes();
+//        try {
+//            if (fads.registrarSolicitud(s) != null) {
+//                System.out.println("Solicitud realizada con folio: " + s.getFolio());
+//            } else {
+//                System.out.println("Error");
+//            }
+//        } catch (EquipoNotFoundException | EmpleadoNotFoundException |
+//                PersistenciaException | CorreoException ex) {
+//            System.out.println("No se pudo realizar el registro");
+//        }
+        
+         IAdmonUsuariosYPerfiles fauyp = new FAdmonUsuariosYPerfiles();
         try {
-            if (fads.registrarSolicitud(s) != null) {
-                System.out.println("Solicitud realizada con folio: " + s.getFolio());
+            if (fauyp.alta(u) != null) {
+                System.out.println("Usuario dado de alta con ID: " + u.getIdUsuario());
             } else {
                 System.out.println("Error");
             }
-        } catch (EquipoNotFoundException | EmpleadoNotFoundException |
-                PersistenciaException | CorreoException ex) {
-            System.out.println("No se pudo realizar el registro");
+        } catch (PreexistingEntityException x) {
+            System.out.println("No se pudo dar de alta al usuario");
         }
+        
     }
 }
