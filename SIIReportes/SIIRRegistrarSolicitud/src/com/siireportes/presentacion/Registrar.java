@@ -149,19 +149,9 @@ public class Registrar extends javax.swing.JFrame {
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
 
         cboProblema.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboProblema.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No enciende cpu", "No enciende monitor", "No enciende regulador", "No enciende impresora", "Se reincia sola", "Muestra pantalla azul", "Teclado no responde", "Mouse no responde", "Impresora no imprime", "No hay conección a internet", "Otro.." }));
-        cboProblema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboProblemaActionPerformed(evt);
-            }
-        });
 
         txtProblema.setColumns(20);
         txtProblema.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -341,14 +331,6 @@ public class Registrar extends javax.swing.JFrame {
     private void txtIdEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEquipoActionPerformed
         buscarEquipo();
     }//GEN-LAST:event_txtIdEquipoActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void cboProblemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboProblemaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboProblemaActionPerformed
     
     private void buscarEquipo() {
         if (!txtIdEquipo.getText().equals("")) {

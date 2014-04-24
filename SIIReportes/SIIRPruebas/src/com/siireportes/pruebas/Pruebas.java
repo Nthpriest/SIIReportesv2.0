@@ -59,7 +59,7 @@ public class Pruebas {
                 "bearz_x@hotmail.com");
         Equipo eq = new Equipo("EQ0001", "Recepción");
         
-        Usuario u = new Usuario("US2", "Salome", "Burgos", "Rodriguez", "California", "6441925729", 
+        Usuario u = new Usuario(0, "Salome", "Burgos", "Rodriguez", "California", "6441925729", 
                 "Salome_burgos@hotmail.com", "salome123", "Capturista");
         
         //emjc.create(em);
@@ -82,16 +82,15 @@ public class Pruebas {
 //            System.out.println("No se pudo realizar el registro");
 //        }
         
-         IAdmonUsuariosYPerfiles fauyp = new FAdmonUsuariosYPerfiles();
-        try {
-            if (fauyp.alta(u) != null) {
-                System.out.println("Usuario dado de alta con ID: " + u.getIdUsuario());
-            } else {
-                System.out.println("Error");
-            }
-        } catch (PreexistingEntityException x) {
-            System.out.println("No se pudo dar de alta al usuario");
-        }
-        
+//         IAdmonUsuariosYPerfiles fauyp = new FAdmonUsuariosYPerfiles();
+//        try {
+//            if (fauyp.alta(u) != null) {
+//                System.out.println("Usuario dado de alta con ID: " + u.getIdUsuario());
+//            } else {
+//                System.out.println("Error");
+//            }
+//        } catch (PreexistingEntityException x) {
+//            System.out.println("No se pudo dar de alta al usuario");
+//        }
     }
 }

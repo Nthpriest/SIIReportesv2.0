@@ -37,7 +37,7 @@ public class Usuario implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "idUsuario")
-    private String idUsuario;
+    private int idUsuario;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "aPaterno")
@@ -59,11 +59,11 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String idUsuario) {
+    public Usuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(String idUsuario, String nombre, String aPaterno, 
+    public Usuario(int idUsuario, String nombre, String aPaterno, 
             String aMaterno, String direccion, String telefono, String email, 
             String contraseña, String perfil) {
         this.idUsuario = idUsuario;
@@ -77,11 +77,11 @@ public class Usuario implements Serializable {
         this.perfil = perfil;        
     }
 
-    public String getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -151,23 +151,26 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        int hash = 3;
+        hash = 67 * hash + this.idUsuario;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Usuario other = (Usuario) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (this.idUsuario != other.idUsuario) {
             return false;
         }
         return true;
     }
+
 
     @Override
     public String toString() {

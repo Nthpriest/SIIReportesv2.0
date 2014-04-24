@@ -24,7 +24,6 @@ package com.siireportes.admonempleados;
 import com.siireportes.excepciones.EmpleadoNotFoundException;
 import com.siireportes.interfacespersistencia.IPersistencia;
 import com.siireportes.objetosnegocio.Empleado;
-import com.siireportes.persistencia.EmpleadosJpaController;
 import com.siireportes.persistencia.FPersistencia;
 
 /**
