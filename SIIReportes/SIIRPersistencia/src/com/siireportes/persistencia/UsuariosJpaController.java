@@ -123,7 +123,14 @@ public class UsuariosJpaController implements Serializable {
             em.close();
         }
     }
-
+    
+    public List<Usuario> findUsuariosPorNombre(String nombre) {
+        String queryString = "SELECT u FROM Usuario u WHERE LOWER(u.nombre) LIKE :nombre";
+        Query query = getEntityManager().createQuery(queryString);
+        query.setParameter("nombre", nombre.toLowerCase() + '%');
+        return query.getResultList();
+    }    
+    
     public int getUsuariosCount() {
         EntityManager em = getEntityManager();
         try {

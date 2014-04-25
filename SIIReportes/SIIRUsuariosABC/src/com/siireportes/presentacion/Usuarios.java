@@ -35,6 +35,7 @@ public class Usuarios extends javax.swing.JFrame {
     UsuariosJpaController ujc;
     Usuario u;
 
+    //<editor-fold defaultstate="collapsed" desc=" Init ">     
     /**
      * Creates new form Usuario
      */
@@ -42,8 +43,9 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.tabla = new DefaultTableModel(new Object[]{"ID", "Perfil", "Nombre",
-            "A. Paterno", "A. Materno", "Dirección", "Teléfono", "Email"}, 0);
+            "A. Paterno", "A. Materno", "Dirección", "Teléfono", "Email", "Contraseña"}, 0);
         jTable1.setModel(tabla);
+        jTable1.getColumnModel().getColumn(8).setPreferredWidth(0);
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -57,11 +59,13 @@ public class Usuarios extends javax.swing.JFrame {
                 txtDireccion.setText(jTable1.getValueAt(fila, 5).toString());
                 txtTelefono.setText(jTable1.getValueAt(fila, 6).toString());
                 txtEmail.setText(jTable1.getValueAt(fila, 7).toString());
+                txtContraseña.setText(jTable1.getValueAt(fila, 8).toString());
             }
         });
         actualizaLista();
     }
-
+    //</editor-fold>
+    
     /**
      * This method assign an icon to the main frame.
      *
@@ -128,7 +132,7 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel9.setText("Buscar por:");
 
         cboBuscar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cboBuscar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Perfil", "Nombre", "A. Paterno", "A. Materno", "Teléfono", "E-Mail" }));
+        cboBuscar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Id", "Nombre" }));
 
         txtBuscar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -195,8 +199,8 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(cboBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Usuario"));
@@ -328,7 +332,7 @@ public class Usuarios extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         jToolBar1.setRollover(true);
@@ -336,7 +340,7 @@ public class Usuarios extends javax.swing.JFrame {
         btnNuevo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/new.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
-        btnNuevo.setToolTipText("Nuevo");
+        btnNuevo.setToolTipText("Nuevo Usuario");
         btnNuevo.setFocusable(false);
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -351,6 +355,7 @@ public class Usuarios extends javax.swing.JFrame {
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/add.png"))); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.setToolTipText("Agregar Usuario");
         btnAgregar.setFocusable(false);
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAgregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -364,6 +369,7 @@ public class Usuarios extends javax.swing.JFrame {
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/refresh.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.setToolTipText("Actualizar Usuario");
         btnActualizar.setFocusable(false);
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -377,6 +383,7 @@ public class Usuarios extends javax.swing.JFrame {
         btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/siireportes/img/del.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.setToolTipText("Eliminar Usuario");
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -426,29 +433,22 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //<editor-fold defaultstate="collapsed" desc=" Actions Performed ">     
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
-
+   
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         fauyp = new FAdmonUsuariosYPerfiles();
-        u = new Usuario();
-        u.setNombre(txtNombre.getText().trim());
-        u.setAPaterno(txtPaterno.getText().trim());
-        u.setAMaterno(txtMaterno.getText().trim());
-        u.setDireccion(txtDireccion.getText().trim());
-        u.setTelefono(txtTelefono.getText().trim());
-        u.setEmail(txtEmail.getText().trim());
-        u.setContraseña(txtContraseña.getText().trim());
-        u.setPerfil(cboPerfil.getSelectedItem().toString());
+        insertaDatos();
         try {
             if (fauyp.alta(u) != null) {
                 JOptionPane.showMessageDialog(this, "Agregado correctamente", "Éxito",
@@ -470,18 +470,10 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         fauyp = new FAdmonUsuariosYPerfiles();
-        u = new Usuario();
-        u.setIdUsuario(Integer.parseInt(txtId.getText().trim()));
-        u.setNombre(txtNombre.getText().trim());
-        u.setAPaterno(txtPaterno.getText().trim());
-        u.setAMaterno(txtMaterno.getText().trim());
-        u.setDireccion(txtDireccion.getText().trim());
-        u.setTelefono(txtTelefono.getText().trim());
-        u.setEmail(txtEmail.getText().trim());
-        u.setContraseña(txtContraseña.getText().trim());
-        u.setPerfil(cboPerfil.getSelectedItem().toString());
+        insertaDatos();
         try {
             if (!txtId.getText().equals("")) {
+                u.setIdUsuario(Integer.parseInt(txtId.getText().trim()));
                 fauyp.cambio(u);
                 JOptionPane.showMessageDialog(this, "Actualizado correctamente", "Éxito",
                         JOptionPane.INFORMATION_MESSAGE, null);
@@ -529,13 +521,43 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        switch (cboBuscar.getSelectedItem().toString()) {
+            case "Todos": {
+                borraLista();
+                actualizaLista();
+                break;
+            }
+            case "Id": {
+                if (!txtBuscar.getText().equals("")) {
+                    borraLista();
+                    buscaPorId(Integer.parseInt(txtBuscar.getText().trim()));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Necesita ingresar un id"
+                            + " en el campo de busqueda", "Error",
+                            JOptionPane.ERROR_MESSAGE, null);
+                }
+                break;
+            }
+            case "Nombre": {
+                if (!txtBuscar.getText().equals("")) {
+                borraLista();
+                buscaPorNombre(txtBuscar.getText().trim());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Necesita ingresar un"
+                            + " nombre en el campo de busqueda", "Error",
+                            JOptionPane.ERROR_MESSAGE, null);
+                }
+                break;
+            }
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc=" Datos ">
     public void limpiar() {
         txtId.setText("");
         txtNombre.setText("");
@@ -548,14 +570,44 @@ public class Usuarios extends javax.swing.JFrame {
         txtContraseña.setText("");
     }
 
+    public void insertaDatos() {
+        u = new Usuario();
+        u.setNombre(txtNombre.getText().trim());
+        u.setAPaterno(txtPaterno.getText().trim());
+        u.setAMaterno(txtMaterno.getText().trim());
+        u.setDireccion(txtDireccion.getText().trim());
+        u.setTelefono(txtTelefono.getText().trim());
+        u.setEmail(txtEmail.getText().trim());
+        u.setContraseña(txtContraseña.getText().trim());
+        u.setPerfil(cboPerfil.getSelectedItem().toString());
+    }
+
     private void actualizaLista() {
         ujc = new UsuariosJpaController();
-        //String nombre = txtBuscarNombre.getText().trim();
         List<Usuario> lista = ujc.findUsuariosEntities();
         for (Usuario u : lista) {
             tabla.addRow(new Object[]{u.getIdUsuario(), u.getPerfil(),
                 u.getNombre(), u.getAPaterno(), u.getAMaterno(),
-                u.getDireccion(), u.getTelefono(), u.getEmail()});
+                u.getDireccion(), u.getTelefono(), u.getEmail(), u.getContraseña()});
+        }
+    }
+
+    private void buscaPorId(int id) {
+        u = new Usuario();
+        ujc = new UsuariosJpaController();
+        u = ujc.findUsuarios(id);
+        tabla.addRow(new Object[]{u.getIdUsuario(), u.getPerfil(), u.getNombre(),
+            u.getAPaterno(), u.getAMaterno(), u.getDireccion(), u.getTelefono(),
+            u.getEmail(), u.getContraseña()});
+    }
+
+    private void buscaPorNombre(String nombre) {
+        ujc = new UsuariosJpaController();
+        List<Usuario> lista = ujc.findUsuariosPorNombre(nombre);
+        for (Usuario u : lista) {
+            tabla.addRow(new Object[]{u.getIdUsuario(), u.getPerfil(),
+                u.getNombre(), u.getAPaterno(), u.getAMaterno(),
+                u.getDireccion(), u.getTelefono(), u.getEmail(), u.getContraseña()});
         }
     }
 
@@ -565,7 +617,8 @@ public class Usuarios extends javax.swing.JFrame {
             i--;
         }
     }
-
+    //</editor-fold>
+    
     /**
      * @param args the command line arguments
      */
@@ -589,6 +642,8 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" Variables ">     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
@@ -625,4 +680,5 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtPaterno;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+    //</editor-fold>
 }
