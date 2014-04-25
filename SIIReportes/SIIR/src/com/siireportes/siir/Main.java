@@ -80,7 +80,7 @@ public class Main extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema de Información y Reportes");
+        setTitle("Sistema Inteligente de ISSSTESON");
         setIconImage(iconSiir());
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
 
