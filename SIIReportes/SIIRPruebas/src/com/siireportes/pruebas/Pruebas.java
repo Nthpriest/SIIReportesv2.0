@@ -61,6 +61,8 @@ public class Pruebas {
         
         Usuario u = new Usuario(0, "Salome", "Burgos", "Rodriguez", "California", "6441925729", 
                 "Salome_burgos@hotmail.com", "salome123", "Capturista");
+
+        System.out.println(ujc.lastInsert());
         
         //emjc.create(em);
         //eqjc.create(eq);

@@ -124,6 +124,12 @@ public class UsuariosJpaController implements Serializable {
         }
     }
     
+    public int lastInsert() {
+        String queryString = "select MAX(idUsuario) from usuarios";
+        Query query = getEntityManager().createNativeQuery(queryString);
+        return ((Integer) query.getSingleResult()).intValue();
+    }
+    
     public List<Usuario> findUsuariosPorNombre(String nombre) {
         String queryString = "SELECT u FROM Usuario u WHERE LOWER(u.nombre) LIKE :nombre";
         Query query = getEntityManager().createQuery(queryString);

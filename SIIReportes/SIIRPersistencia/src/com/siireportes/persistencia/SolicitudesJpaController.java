@@ -198,6 +198,12 @@ public class SolicitudesJpaController implements Serializable {
         }
     }
 
+    public int lastInsert() {
+        String queryString = "select MAX(folio) from solicitudes";
+        Query query = getEntityManager().createNativeQuery(queryString);
+        return ((Integer) query.getSingleResult()).intValue();
+    }    
+    
     public Solicitud findSolicitudes(Integer id) {
         EntityManager em = getEntityManager();
         try {

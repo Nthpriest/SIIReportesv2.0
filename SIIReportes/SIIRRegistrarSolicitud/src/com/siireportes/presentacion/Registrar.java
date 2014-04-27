@@ -290,11 +290,10 @@ public class Registrar extends javax.swing.JFrame {
         String txproblema;
         txproblema = txtProblema.getText().trim();
         try {
-            int scounter = sjc.getSolicitudesCount() + 1;
             Solicitud s;
-            s = new Solicitud(scounter, eq, em, cproblema, txproblema, fecha);
+            s = new Solicitud((sjc.lastInsert()+1), eq, em, cproblema, txproblema, fecha);
             if (fads.registrarSolicitud(s) != null) {
-                JOptionPane.showMessageDialog(this, "Se generó la solicitud\n  con folio: " + s.getFolio(), "Éxito", JOptionPane.INFORMATION_MESSAGE, null);
+                JOptionPane.showMessageDialog(this, "Se generó la solicitud\n  con folio: " + sjc.lastInsert(), "Éxito", JOptionPane.INFORMATION_MESSAGE, null);
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo generar la solicitud", "Error", JOptionPane.ERROR_MESSAGE);
             }
