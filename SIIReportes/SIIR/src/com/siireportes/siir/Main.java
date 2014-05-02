@@ -88,6 +88,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setBounds(570, 10, 610, 610);
         desktopPane.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
